@@ -3,3 +3,4 @@ env/*
 *.pyc
 usbeatit/usbeatit/settings_local.py
 *.directory
+usbeatit/images*

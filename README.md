@@ -33,7 +33,7 @@ cd usbeatit
 
 6) Initalize/Sync the database
 ```
-python manage.py syncdb --migrate --settings usbeatit.settings_local
+python manage.py migrate usbeatit.settings_local
 ```
 
 7) Run the server:

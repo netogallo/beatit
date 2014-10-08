@@ -1,1 +1,3 @@
 from usbeatit.settings import *
+
+FACEBOOK_APP_SECRET = raise Exception('App secret not set!')

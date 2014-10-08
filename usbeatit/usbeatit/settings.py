@@ -25,6 +25,12 @@ SECRET_KEY = 'much random, very security, lele lolo lulu papa ka'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django_facebook.context_processors.facebook',
+    'django.core.context_processors.request',
+    'django.contrib.auth.context_processors.auth',
+)
+
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -42,7 +48,18 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_facebook',
+    'home',
 )
+
+AUTHENTICATION_BACKENDS = (
+    'django_facebook.auth_backends.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+AUTH_USER_MODEL = 'django_facebook.FacebookCustomUser'
+
+AUTH_PROFILE_MODULE = 'django_facebook.FacebookProfile'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -87,3 +104,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+FACEBOOK_APP_ID = '1502897973299426'
+FACEBOOK_DEFAULT_SCOPE = ['email', 'user_about_me', 'user_birthday', 'user_website']

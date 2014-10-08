@@ -15,6 +15,10 @@
     <title>{% trans 'US Beat It' %}</title>
     {% endblock %}
 
+    <link href="{{ STATIC_URL }}django_facebook/css/facebook.css" type="text/css" rel="stylesheet" media="all" />
+
+    {% include 'django_facebook/_facebook_js.html' %}
+
     <!-- Bootstrap Core CSS -->
     <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
 
@@ -62,6 +66,12 @@
                     <li>
                         <a href="#">Contact</a>
                     </li>
+		    <li class="dropdown">
+		      <a class="dropdown-toggle" data-toggle="dropdown" href="#">{% trans 'Log In' %}</a>
+			<ul class="dropdown-menu" role="menu">
+			  <li>{% include 'connection/login.html' %}</li>
+			</ul>
+		    </li>
 		  {% endblock %}
                 </ul>
             </div>
