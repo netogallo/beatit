@@ -1,5 +1,5 @@
 Django==1.7
 wsgiref==0.1.2
 Pillow >= 2.6.0
--e git://github.com/netogallo/Django-facebook.git#egg=Django-facebook
+django-allauth >= 0.19.0
 

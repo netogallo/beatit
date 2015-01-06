@@ -26,9 +26,13 @@ SECRET_KEY = 'much random, very security, lele lolo lulu papa ka'
 DEBUG = True
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django_facebook.context_processors.facebook',
     'django.core.context_processors.request',
     'django.contrib.auth.context_processors.auth',
+
+    # allauth
+    "django.core.context_processors.request",
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount",
 )
 
 TEMPLATE_DEBUG = True
@@ -48,18 +52,20 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_facebook',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
     'home',
 )
 
 AUTHENTICATION_BACKENDS = (
-    'django_facebook.auth_backends.FacebookBackend',
+    "allauth.account.auth_backends.AuthenticationBackend",
     'django.contrib.auth.backends.ModelBackend',
 )
 
-AUTH_USER_MODEL = 'django_facebook.FacebookCustomUser'
-
-AUTH_PROFILE_MODULE = 'django_facebook.FacebookProfile'
+SITE_ID = 1
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
