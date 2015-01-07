@@ -53,6 +53,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'ckeditor',
+    'django_wysiwyg',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -111,5 +113,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+DJANGO_WYSIWYG_FLAVOR = "ckeditor"
+
 FACEBOOK_APP_ID = '1502897973299426'
 FACEBOOK_DEFAULT_SCOPE = ['email', 'user_about_me', 'user_birthday', 'user_website']
+
+CKEDITOR_UPLOAD_PATH = "uploads/"

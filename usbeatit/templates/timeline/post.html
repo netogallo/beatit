@@ -1,0 +1,21 @@
+{% load wysiwyg %}
+{% wysiwyg_setup %}
+<div class="post">
+  {% if user.is_staff %}
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="input-group">
+	<input type="hidden" name="timeline" value={{ post.timeline }} />
+	<input type="text" class="form-control" placeholder="title" aria-describedby="title" name="title" value="{{ post.title }}"/>
+	</div>
+	<textarea name="content" id="content">
+	  {{ post.content }}
+	</textarea>
+
+	{% wysiwyg_editor "content" %}
+    </form>
+    {% else %}
+
+    {% endif %}
+</div>
+
