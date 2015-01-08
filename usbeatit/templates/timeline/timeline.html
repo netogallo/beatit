@@ -3,12 +3,12 @@
   {% if user.is_staff %}
 
   {% include 'timeline/post.html' with post=timeline.empty_post %}
-  
+
   {% endif %}
 
-  {% for page in timeline.get_posts %}
+  {% for post in timeline.get_posts %}
 
-  {% include post.html with post=post %}
+  {% include 'timeline/post.html' with post=post %}
   
   {% endfor %}
 

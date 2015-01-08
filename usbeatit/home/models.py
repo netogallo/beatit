@@ -7,10 +7,11 @@ class Timeline(models.Model):
     name = models.CharField(max_length=20, unique=True);
     timelines = models.ManyToManyField("self")
 
-    def get_pages():
-        return Page.objects.filter(timeline__in=self + list(self.timelines)).order_by('date')
+    def get_posts(self):
+        timelines = [self] + list(self.timelines.all())
+        return Post.objects.filter(timeline__in=timelines).order_by('date')
 
-    def empty_post():
+    def empty_post(self):
         return Post(timeline=self)
 
 
@@ -23,3 +24,6 @@ class Post(models.Model):
     timeline = models.ForeignKey(Timeline)
     content = models.TextField()
     title = models.CharField(max_length=180)
+
+    def wysiwyg_id(self):
+        return "wysiwyg_content_" + str(self.id)

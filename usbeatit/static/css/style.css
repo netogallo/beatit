@@ -1,0 +1,24 @@
+.timeline{
+
+    margin-bottom: 20px;
+}
+
+.timeline .post{
+    margin-top: 20px;
+}
+
+.post .post-title{
+
+    font-size: 50px;
+    height: 55px;
+    margin-bottom: 10px;
+}
+
+.post .input-group{
+    width: 100%;
+}
+
+.content-section{
+
+    overflow: auto;
+}

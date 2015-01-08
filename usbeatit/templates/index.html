@@ -18,6 +18,8 @@
     <!-- Bootstrap Core CSS -->
     <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
 
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="{% static "css/landing-page.css" %}" rel="stylesheet">
 
@@ -115,9 +117,13 @@
 
     <div class="content-section">
 
-      {% block content_section %}
-      {% include "timeline/timeline.html" with timeline=timeline %}
-      {% endblock %}
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-8">
+	{% block content_section %}
+	{% include 'timeline/timeline.html' with timeline=timeline %}
+	{% endblock %}
+      </div>
 
     </div>
 
@@ -188,6 +194,8 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{% static "js/bootstrap.min.js" %}"></script>
+
+    <script src="{% static "js/main.js" %}"></script>
 </body>
 
 </html>
