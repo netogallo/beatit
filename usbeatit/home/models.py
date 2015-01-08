@@ -27,3 +27,8 @@ class Post(models.Model):
 
     def wysiwyg_id(self):
         return "wysiwyg_content_" + str(self.id)
+
+    def form(self):
+        from home import forms
+        fid = "id_%s_" % str(self.id) + "%s"
+        return forms.PostForm(instance=self, auto_id=fid)

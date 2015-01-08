@@ -1,1 +1,3 @@
-homepage_timeline = 'Homepage'
+HOME_TIMELINE = 'Homepage'
+
+BOARD_TIMELINE = 'BoardPage'

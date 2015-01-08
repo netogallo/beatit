@@ -7,22 +7,36 @@ from django.http import JsonResponse
 from django.template.response import TemplateResponse
 
 
-def home(request):
-    (timeline, _) = models.Timeline.objects.get_or_create(
-        name=const.homepage_timeline)
+def timeline_request(timeline, template, request):
+    (page_timeline, _) = models.Timeline.objects.get_or_create(
+        name=timeline)
 
     return TemplateResponse(
         request,
-        'index.html',
+        template,
         {
-            'timeline': timeline
+            'timeline': page_timeline
         }
     )
 
 
-def save_form(request):
+def home(request):
+    return timeline_request(
+        const.HOME_TIMELINE,
+        'index.html',
+        request)
 
-    if request.POST['id']:
+
+def board(request):
+    return timeline_request(
+        const.BOARD_TIMELINE,
+        'board.html',
+        request)
+
+
+def save_post(request):
+
+    if request.POST.get('id'):
         post = models.Post.objects.get(id=request.POST['id'])
     else:
         post = None

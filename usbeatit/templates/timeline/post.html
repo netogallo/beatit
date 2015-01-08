@@ -1,21 +1,16 @@
 {% load i18n %}
-{% load wysiwyg %}
-{% wysiwyg_setup %}
 <div class="post">
   {% if user.is_staff %}
-    <form action="/home/save_post" class="save_post_form" method="POST">
+    <form action="" class="save_post_form" method="POST">
       {% csrf_token %}
       <div class="input-group">
 	{% if post.id %}
 	<input type="hidden" name="id" value={{ post.id }} />
 	{% endif %}
-	<input type="hidden" name="timeline" value="{{ post.timeline.id }}" />
+	<input type="hidden" name="timeline" value={{ post.timeline.id }} />
 	<input type="text" class="form-control post-title" placeholder="title" aria-describedby="title" name="title" value="{{ post.title }}"/>
 	</div>
-	<textarea name="content" id="{{ post.wysiwyg_id }}">
-	  {{ post.content }}
-	</textarea>
-	{% wysiwyg_editor post.wysiwyg_id %}
+        {{ post.form.content }}
 
 	<input type="submit" class="form-control" value="{% trans 'Save Post' %}"/>
     </form>

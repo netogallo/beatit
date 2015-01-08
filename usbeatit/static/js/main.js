@@ -1,3 +1,9 @@
+ck_config = {
+    'awesome_ckeditor': {
+        'toolbar': 'Basic',
+    }
+};
+
 (function(){
 
     function get_form_values(form){
@@ -13,6 +19,13 @@
 
     $('.save_post_form').on('submit', function(e){
         e.preventDefault();
-	console.log(get_form_values(this));
+	var self = this;
+	$.post(
+	    '/home/save_post',
+	    get_form_values(self),
+	    function(data,status,xhr){
+		
+		console.log(data);
+	    });
     });
 })();

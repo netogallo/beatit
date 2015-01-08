@@ -113,9 +113,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT='/tmp/'
+
 DJANGO_WYSIWYG_FLAVOR = "ckeditor"
 
 FACEBOOK_APP_ID = '1502897973299426'
 FACEBOOK_DEFAULT_SCOPE = ['email', 'user_about_me', 'user_birthday', 'user_website']
 
-CKEDITOR_UPLOAD_PATH = "uploads/"
+MEDIA_URL='static/'
+
+CKEDITOR_UPLOAD_PATH = "static/uploads/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+    },
+}
