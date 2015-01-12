@@ -1,21 +1,60 @@
 {% load i18n %}
-<div class="post">
+<div class="post col-lg-12">
   {% if user.is_staff %}
-    <form action="" class="save_post_form" method="POST">
+  <form action="" class="save_post_form" method="POST">
+    <div class="input-group">
+
       {% csrf_token %}
-      <div class="input-group">
-	{% if post.id %}
-	<input type="hidden" name="id" value={{ post.id }} />
-	{% endif %}
-	<input type="hidden" name="timeline" value={{ post.timeline.id }} />
-	<input type="text" class="form-control post-title" placeholder="title" aria-describedby="title" name="title" value="{{ post.title }}"/>
-	</div>
-        {{ post.form.content }}
+      
+      {% if post.id %}
+      <input type="hidden" name="id" value={{ post.id }} />
+      {% endif %}
+      <input type="hidden" name="timeline" value={{ post.timeline.id }} />
+      <input type="text" class="form-control post-title" placeholder="title" aria-describedby="title" name="title" value="{{ post.title }}"/>
+    </div>
+    {{ post.form.content }}
 
-	<input type="submit" class="form-control" value="{% trans 'Save Post' %}"/>
+    <div class="col-lg-12">
+      <div class="col-lg-4">
+	<label for="registration">
+	  {% trans 'Allow registrations' %}
+	</label>
+      </div>
+
+      <div class="col-lg-4">
+	<select name="registration" class="form-control">
+	  <option value="0">{% trans 'No' %}</option>
+	  <option value="1">{% trans 'Yes' %}</option>
+	</select>
+      </div>
+    </div>
+    
+    <div class="col-lg-4">
+      <input type="submit" class="form-control col-lg-3" value="{% trans 'Save Post' %}"/>
+    </div>
+  </form>
+
+  {% if post.id %}
+  
+  <div class="col-lg-4">
+    <form method="POST" class="delete_post_form">
+      {% csrf_token %}
+      <input type="hidden" name="id" value="{{ post.id }}"/>
+      <input type="submit" class="form-control" value="{% trans 'Delete Post'%}"/>
     </form>
-    {% else %}
+  </div>
+  {% else %}
+  {% endif %}
+{% else %}
 
-    {% endif %}
+<div class="post-heading">
+  {{ post.title }}
+</div>
+
+<div class="post-content">
+  {{ post.content | safe }}
+</div>
+
+{% endif %}
 </div>
 

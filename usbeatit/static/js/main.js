@@ -25,7 +25,32 @@ ck_config = {
 	    get_form_values(self),
 	    function(data,status,xhr){
 		
+		if(data.success)
+		    window.location.reload();
 		console.log(data);
 	    });
     });
+
+    $('.delete_post_form').on('submit', function(e){
+	e.preventDefault();
+	$.post(
+	    '/home/delete_post',
+	    get_form_values(this),
+	    function(data,status,xhr){
+		
+		if(data.success)
+		    window.location.reload();
+	    })});
+
+    $('.update_user_form').on('submit', function(e){
+	e.preventDefault();
+	$.post(
+	    '/home/user_update',
+	    get_form_values(this),
+	    function(data,status,xhr){
+		
+		if(data.success)
+		    window.location.reload();
+	    })});
+
 })();

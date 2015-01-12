@@ -22,3 +22,9 @@
 
     overflow: auto;
 }
+
+.post .post-heading {
+    border-bottom: 5px solid #799ed2;
+    font-size: 50px;
+    margin-bottom: 10px;
+}

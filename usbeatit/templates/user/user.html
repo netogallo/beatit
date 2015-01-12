@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% load i18n %}
+{% block header_block %}
+{% endblock %}
+
+{% block content_section %}
+
+<h1>{% trans 'User Settings' %}</h1>
+
+<form class="update_user_form" method="POST">
+  {% csrf_token %}
+  <label for="name">{% trans 'First Name' %}</label>
+  <input type="text" class="form-control post-title" placeholder="title" aria-describedby="title" name="first_name" value="{{ user.first_name }}"/>
+  <label for="name">{% trans 'Last Name' %}</label>
+  <input type="text" class="form-control post-title" placeholder="title" aria-describedby="title" name="last_name" value="{{ user.last_name }}"/>
+  <label for="name">{% trans 'E-Mail' %}</label>
+  <input type="text" class="form-control post-title" placeholder="title" aria-describedby="title" name="email" value="{{ user.email }}"/>
+
+  <input type="submit" value="{% trans 'Update Information' %}" />
+</form>
+
+{% endblock %}
