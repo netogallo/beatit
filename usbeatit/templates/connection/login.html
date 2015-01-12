@@ -25,3 +25,8 @@
   </div>
   </div>
 </div>
+{% if login_form.login_failed %}
+<script type="text/javascript">
+  $('#logins').modal('show');
+</script>
+{% endif %}

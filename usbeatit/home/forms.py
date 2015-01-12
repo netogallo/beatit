@@ -4,6 +4,7 @@ from django.forms import ModelForm
 from ckeditor.widgets import CKEditorWidget
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
+from django.contrib.auth import authenticate
 
 
 def valid_user_email(email):
@@ -36,6 +37,15 @@ class LoginForm(forms.Form):
     email = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
+    def clean(self):
+        user = authenticate(
+            username=self.cleaned_data.get('email'),
+            password=self.cleaned_data.get('password'))
+        if user is not None and user.is_active:
+            return self.cleaned_data
+        else:
+            raise forms.ValidationError(_('Invalid email or password'))
+
 
 class RegistrationForm(LoginForm):
     first_name = forms.CharField()
@@ -49,7 +59,6 @@ class RegistrationForm(LoginForm):
     def clean(self):
         password = self.cleaned_data.get('password')
         check = self.cleaned_data.get('check_password')
-        print('passwords %s %s' % (password,check))
         if password == check:
             return self.cleaned_data
         else:

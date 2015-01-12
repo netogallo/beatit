@@ -7,6 +7,7 @@ from django.template.response import TemplateResponse
 from django.shortcuts import Http404
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
+from django.contrib import auth
 
 
 class IndexTemplateResponse(TemplateResponse):
@@ -24,23 +25,28 @@ class IndexTemplateResponse(TemplateResponse):
         super(IndexTemplateResponse, self).__init__(*args, **kwargs)
 
 
-def timeline_request(timeline, template, request):
-    (page_timeline, _) = models.Timeline.objects.get_or_create(
+def timeline_request(timeline, template, request, args=None):
+    (page_timeline, x) = models.Timeline.objects.get_or_create(
         name=timeline)
+
+    if not(args):
+        args = {}
+
+    args['timeline'] = page_timeline
+
     return IndexTemplateResponse(
         request,
         template,
-        {
-            'timeline': page_timeline,
-        }
+        args
     )
 
 
-def home(request):
+def home(request, args=None):
     return timeline_request(
         const.HOME_TIMELINE,
         'index.html',
-        request)
+        request,
+        args)
 
 
 def board(request):
@@ -72,7 +78,17 @@ def update_user_data(request):
 
 
 def login(request):
-    home(request)
+    form = forms.LoginForm(request.POST)
+    form.full_clean()
+    if form.is_valid():
+        u = auth.authenticate(
+            username=form.cleaned_data.get('email'),
+            password=form.cleaned_data.get('password'))
+        auth.login(request, u)
+        return home(request)
+    else:
+        form.login_failed = True
+        return home(request, {'login_form': form})
 
 
 def register_user(request):
@@ -92,9 +108,8 @@ def register_user(request):
                 email=form.cleaned_data.get('email'),
                 is_active=True,
                 username=form.cleaned_data.get('email'))
-            u.save()
             u.set_password(form.cleaned_data.get('password'))
-
+            u.save()
             return IndexTemplateResponse(
                 request,
                 'user/complete.html')
