@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'ckeditor',
     'django_wysiwyg',
+    'bootstrap3',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',

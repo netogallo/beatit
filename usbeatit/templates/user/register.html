@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+{% load i18n %}
+{% load bootstrap3 %}
+{% block header_block %}
+{% endblock %}
+
+{% block content_section %}
+
+<h1>{% trans 'Create Account' %}</h1>
+
+<form action="{% url 'user_register' %}" method="POST">
+  {% csrf_token %}
+
+  {% bootstrap_form form %}
+  <input type="hidden" name="is_submission" value="is_submission"/>
+
+  <input type="submit" value="{% trans 'Create Account' %}" />
+</form>
+
+{% endblock %}

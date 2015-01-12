@@ -69,10 +69,10 @@
 		    {% endfor %} 
 		    <li>
 		    {% if user.is_authenticated %}
-		    <a class="btn" data-backdrop="static" data-toggle="modal" href="{% url 'user_page' %}">{% trans 'My Account' %}</a>
+		    <a class="btn" data-backdrop="static" href="{% url 'user_page' %}">{% trans 'My Account' %}</a>
 		     </button>
 		    {% else %}
-		      <a class="btn" data-controls-modal="login-menu" data-backdrop="static" >{% trans 'Log In' %}</a>
+		      <a class="btn" data-toggle="modal" data-controls-modal="logins" data-target="#logins" data-backdrop="static" >{% trans 'Log In' %}</a>
 		    {% endif %}
 		    </li>
 		  {% endblock %}
@@ -189,7 +189,7 @@
         </div>
     </footer>
 
-    {% include 'connection/login.html' %}
+    {% include 'connection/login.html' with login_form=login_form %}
     
     <!-- jQuery Version 1.11.0 -->
     <!--
